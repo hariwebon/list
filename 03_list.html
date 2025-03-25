@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sports Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color:white;
+    background-color:black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 8px 15px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0055aa;
+        }
+    </style>
+</head>
+<body>
+    <h1>GYM INFORMATION</h1>
+    
+    <h2>Schedule (List of Workouts)</h2>
+    <ul id="sportsList">
+        <li>Biceps</li>
+        <li>Triceps</li>
+        <li>Lat</li>
+    </ul>
+    <input id="newSport" placeholder="Add new sport">
+    <button onclick="addSportToList()">Add Workout</button>
+    
+    <h2>Training Steps</h2>
+    <ol id="trainingSteps">
+        <li>Hit Workouts</li>
+        <li>Strength Trainning</li>
+    </ol>
+    <input id="newStep" placeholder="Add new step">
+    <button onclick="addTrainingStep()">Add Step</button>
+    
+    <h2>Workout Count Table</h2>
+    <table id="sportsTable">
+        <tr style="color:red";>
+            <th>Days</th>
+            <th>Workout name</th>
+            <th>Reps</th>
+        </tr>
+        <tr>
+            <td>Monday</td>
+            <td>Chest & Triceps</td>
+            <td>11 * 3</td>
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            <td>Back & Lat</td>
+            <td>11 * 3</td>
+        </tr>
+    </table>
+    
+    <h3>Add New Workout Count Table</h3>
+    <input id="sportName" placeholder="Day name">
+    <input id="sportType" placeholder="Workout name">
+    <input id="playerCount" placeholder="count">
+    <button onclick="addSportToTable()">Add to Table</button>
+
+    <script>
+        // Add sport to unordered list
+        function addSportToList() {
+            const input = document.getElementById("newSport");
+            if (input.value.trim()) {
+                const li = document.createElement("li");
+                li.textContent = input.value;
+                document.getElementById("sportsList").appendChild(li);
+                input.value = "";
+            } else {
+                alert("Please enter a sport name");
+            }
+        }
+
+        // Add step to ordered list
+        function addTrainingStep() {
+            const input = document.getElementById("newStep");
+            if (input.value.trim()) {
+                const li = document.createElement("li");
+                li.textContent = input.value;
+                document.getElementById("trainingSteps").appendChild(li);
+                input.value = "";
+            } else {
+                alert("Please enter a training step");
+            }
+        }
+
+        // Add sport to table
+        function addSportToTable() {
+            const name = document.getElementById("sportName").value;
+            const type = document.getElementById("sportType").value;
+            const players = document.getElementById("playerCount").value;
+            
+            if (name && type && players) {
+                const table = document.getElementById("sportsTable");
+                const row = table.insertRow();
+                
+                row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${type}</td>
+                    <td>${players}</td>
+                `;
+                
+                // Clear inputs
+                document.getElementById("sportName").value = "";
+                document.getElementById("sportType").value = "";
+                document.getElementById("playerCount").value = "";
+            } else {
+                alert("Please fill all fields");
+            }
+        }
+    </script>
+</body>
+</html>
